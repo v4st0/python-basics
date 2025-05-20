@@ -395,7 +395,7 @@ for indice, nome in enumerate(lista):
 """
 
 
-"""EXERCICIO DE LISTAS: CRIAR UMA LISTA DE COMPRAS"""
+"""EXERCICIO DE LISTAS: CRIAR UMA LISTA DE COMPRAS
 
 lista_compras = []
 
@@ -440,3 +440,238 @@ while True:
 
     else:
         print('Opcao invalida. Escolha 1, 2, 3 ou 4.')
+"""
+
+
+
+"""IMPRECISAO DOS NUMEROS FLOAT + ROUND E DECIMAL.DECIMAL
+
+import decimal
+
+numero_1 = decimal.Decimal('0.1')
+numero_2 = decimal.Decimal('0.7')
+numero_3 = numero_1 + numero_2
+print(numero_3)
+print(f'{numero_3:.2f}')
+print(round(numero_3, 2))
+"""
+
+
+
+"""SPLIT, JOIN E STRIP METODOS UTEIS DA STR
+
+frase = '   Olha so que   , MASSA VIADO          '
+lista_frases_cruas = frase.split(',')
+
+lista_frases = []
+for i, frase in enumerate(lista_frases_cruas):
+    lista_frases.append(lista_frases_cruas[i].strip())
+
+# print(lista_frases_cruas)
+# print(lista_frases)
+frases_unidas = ', '.join(lista_frases)
+print(frases_unidas)
+"""
+
+
+
+"""LISTAS DENTRO DE LISTAS, ITERAVEIS DENTRO DE ITERAVEIS
+
+salas = [
+    # 0        1
+    ['Maria', 'Helena', ],  # 0
+    # 0
+    ['Elaine', ],  # 1
+    # 0        1        2
+    ['Luiz', 'Joao', 'Eduarda', ],  # 2
+]
+
+# print(salas[1][0])
+# print(salas[0][1])
+# print(salas[2][2])
+# print(salas[2][3][3])
+
+for sala in salas:
+    print(f'A sala e {sala}')
+    for aluno in sala:
+        print(aluno)
+"""
+
+
+
+"""DETALHES SOBRE O INTERPRETADOR DO PYTHON
+
+python mod.py (executa o mod)
+python -u (unbuffered)
+python -m mod (lib mod como script)
+python -c 'cmd' (comando)
+python -i mod.py (interativo com mod)
+
+The zen of Python, por Tim Peters
+
+bonito e melhor que feio.
+explicito e melhor que implicito.
+simples e melhor que complexo.
+complexo e melhor que complicado.
+plano e melhor que aglomerado.
+esparso e melhor que denso.
+legibilidade conta.
+casos especiais nao sao especiais o bastante para quebrar as regras.
+embora a praticidade venca a pureza.
+erros nunca devem passar silenciosamente.
+a menos que sejam explicitamente silenciados.
+diante da ambiguidade, recure a tentacao de adivinhar.
+deve haver um -- e so um -- modo obvio para fazer algo.
+embora esse modo possa nao ser obio a primeira vista menos que voce seja holandes.
+agora e melhor que nunca.
+embora nunca frequentemente seja melhor que *exatamente* agora.
+se a implementacao e dificil de explicar, e uma ma ideia
+se a implementacao e facil de explicar, pode ser uma boa ideia.
+namespaces sao uma grande ideia -- vamos fazer mais dessas!
+"""
+
+
+
+"""DESEMPACOTAMENTO EM CHAMADAS DE FUNCAO
+
+string = 'ABCD'
+lista = ['Maria', 'Helena', 1, 2, 3, 'Eduarda']
+tupla = 'Python', 'e', 'massa'
+salas = [
+    # 0        1
+    ['Maria', 'Helena', ],  # 0
+    # 0
+    ['Elaine', ],  # 1
+    # 0        1        2
+    ['Luiz', 'Joao', 'Eduarda', ],  # 2
+]
+
+# p, b, *_, ap, u =lista
+# print(p, u, ap)
+
+# print('Maria', 'Helena', 1, 2, 3, 'Eduarda')
+# print(*lista)
+# print(*string)
+# print(*tupla)
+
+print(*salas, sep='\n')
+"""
+
+
+"""OPERACAO TERNARIA
+
+# condicao = 10 == 11
+# variavel = 'Valor' if condicao else 'Outro valor'
+# print(variavel)
+# digito = 9  # > 9 = 0
+# novo_digito = digito if digito <= 9 else 0
+# novo_digito = 0 if digito > 9 else digito
+# print(novo_digito)
+print('Valor' if True else 'Outro valor' if True else 'Fim')
+"""
+
+
+
+"""EXERCICIO - GERAR O PRIMEIRO E O SEGUNDO DIGITO DE UM CPF EVENTUALMENTE O CPF COMLETO:
+
+Colete a soma dos 9 primeiros digitos do CPF
+multiplicando cada um dos valores por uma
+contagem regressiva comecando de 10
+
+ex.:  746.824.890-70 (746824890)
+    10  9  8  7  6  5  4  3  2
+*   7  4  6  8  2  4  8  9  0
+    70  36  48  56  12  20  32 27 0
+
+Somar todos so resultados:
+70+36+48+56+12+20+32+27+0 = 301
+multiplicar o resultado anterior por 10
+301 * 10 = 3010
+obvter o resto da divisao da conta anterior por 11
+3010 % 11 = 7
+se o resultado anterior for maior que 9:
+    resultado e 0
+contrario disso:
+    resultado e o valor da conta
+
+O primeiro digito do CPF e 7
+"""
+"""CODIGO DO EXERCICO:
+
+cpf = '746824890'
+
+soma = 0
+multiplicador = 10
+
+for digito in cpf:
+    soma += int(digito) * multiplicador
+    multiplicador -= 1
+
+resultado = (soma * 10) % 11
+primeiro_digito = 0 if resultado > 9 else resultado
+
+cpf_com_primeiro = cpf +str(primeiro_digito)
+soma = 0
+multiplicador = 11
+
+for digito in cpf_com_primeiro:
+    soma += int(digito) * multiplicador
+    multiplicador -= 1
+
+resultado = (soma * 10) % 11
+segundp_digito = 0 if resultado > 9 else resultado
+
+cpf_completo = cpf + str(primeiro_digito) + str(segundp_digito)
+print(f'CPF gerado completo: {cpf_completo}')
+"""
+
+"""CRIANDO UM GERADOR DE CPFs E VALIDADOR
+
+import random
+
+def calcular_digito(cpf_base, fator):
+    soma = 0
+    for digito in cpf_base:
+        soma += int(digito) * fator
+        fator -= 1
+        resultado = (soma * 10) % 11
+        return 0 if resultado > 9 else resultado
+    
+def gerar_cpf():
+    cpf_base = ''.join([str(random.randint(0, 9)) for _ in range(9)])
+    d1 = calcular_digito(cpf_base, 10)
+    d2 = calcular_digito(cpf_base + str(d1), 11)
+    return cpf_base + str(d1) + str(d2)
+
+def validar_cpf(cpf):
+    cpf = cpf.replace(".", "").replace("-", "")
+    if not cpf.isdigit() or len(cpf) != 11:
+        return False
+    
+    cpf_base = cpf[:9]
+    d1 = calcular_digito(cpf_base, 10)
+    d2 = calcular_digito(cpf_base + str(d1), 11)
+    return cpf == cpf_base + str(d1) + str(d2)
+
+while True:
+    print("\n1 - Gerar CPF")
+    print("2 - Validar CPF")
+    print("3 - Sair")
+
+    escolha = input("Escolha uma opcao: ")
+
+    if escolha == "1":
+        cpf_gerado = gerar_cpf()
+        print(f"CPF Gerado: {cpf_gerado[:3]}.{cpf_gerado[3:6]}.{cpf_gerado[6:9]}-{cpf_gerado[9:]}")
+    elif escolha == "2":
+        cpf_input = input("Digite o CPF para validar (somente numeros ou formatado): ")
+        if validar_cpf(cpf_input):
+            print("CPF valido!")
+        else:
+            print("CPF invalido!")
+    elif escolha == "3":
+        print("Saindo...")
+        break
+    else:
+        print("Opcao invalido. Tente novamente.")
+"""
