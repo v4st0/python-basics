@@ -60,7 +60,7 @@ else:
     print('Digite mais de uma letra.') """
 
 
-"""CALCULADORA COM WHILE:
+"""CALCULADORA COM WHILE: 
 
 while True:
     print("\n== Calculadora Simples ===")
