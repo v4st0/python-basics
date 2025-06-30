@@ -1,1 +1,1 @@
-my progression in python basics.
+my progression in python.
